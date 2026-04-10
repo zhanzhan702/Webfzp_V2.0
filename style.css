@@ -1,3 +1,4 @@
+/* 通用样式 */
 .code {
     font-family: 'Courier New', monospace;
 }
@@ -9,34 +10,45 @@
 
 table, th, td {
     border: 1px solid black;
+    border-collapse: collapse;
 }
+
+/* 教材页面图片过渡效果 */
 #textbooks img {
-    transition: transform 0.6s ease, height 0.6s ease;
+    transition: transform 1s ease, height 0.6s ease;
     transform-origin: center center;
     width: auto;
     height: 300px;
     display: block;
     margin: 8px auto;
 }
+
 #textbooks img:hover {
     transform: rotate(360deg);
     height: 480px;
 }
-#jizu{
+
+/* 课表课程背景色 */
+#computer-architecture {
     background-color: red;
 }
-#java{
-    background-color:#2c9dff;
+
+#java-programming {
+    background-color: #2c9dff;
 }
-#bds{
+
+#database-systems {
     background-color: #1cf4e9;
 }
-#web{
+
+#web-development {
     background-color: #10871a;
 }
-#jindaishi{
+
+#modern-chinese-history {
     background-color: #fffb00;
 }
-#lisan{
+
+#discrete-mathematics {
     background-color: #f8009d;
 }

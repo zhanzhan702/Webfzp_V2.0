@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-cn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,39 +7,41 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
-
     <div>
         <h1>2025-2026学期课程情况</h1>
-        <p class="main">
-            <a id="hyperlink" href="introduce.html" target="mainFrame">课程简介</a>
-            <a id="hyperlink" href="schedule.html" target="mainFrame">课表</a>
-            <a id="hyperlink" href="book.html" target="mainFrame">教材</a>
+        <p class="nav-section">
+            <a class="nav-link" href="introduce.html" target="mainFrame">课程简介</a>
+            <a class="nav-link" href="schedule.html" target="mainFrame">课表</a>
+            <a class="nav-link" href="book.html" target="mainFrame">教材</a>
         </p>
     </div>
     <iframe name="mainFrame" src="introduce.html" height="320px" width="640px"></iframe>
-  
-    <footer class="main">
+
+    <footer class="footer-section">
         &copy;闽江大学&nbsp;&nbsp;计算机与大数据学院&trade;软件工程<br>
         联系人：傅展鹏&nbsp;&nbsp;学号：3242508217
     </footer>
-
-
 </body>
 
 <style>
-    h1{
+    h1 {
         color: blue;
         text-align: center;
     }
-    .main{
+
+    .nav-section {
         color: blue;
         background-image: url("images/top-bg.gif");
     }
 
-    #hyperlink:hover {
-        color: red;
+    .footer-section {
+        color: blue;
+        background-image: url("images/top-bg.gif");
     }
 
+    .nav-link:hover {
+        color: red;
+    }
 </style>
 
 </html>
