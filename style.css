@@ -1,0 +1,42 @@
+.code {
+    font-family: 'Courier New', monospace;
+}
+
+.image-container {
+    text-align: center;
+    margin: 20px 0;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+#textbooks img {
+    transition: transform 0.6s ease, height 0.6s ease;
+    transform-origin: center center;
+    width: auto;
+    height: 300px;
+    display: block;
+    margin: 8px auto;
+}
+#textbooks img:hover {
+    transform: rotate(360deg);
+    height: 480px;
+}
+#jizu{
+    background-color: red;
+}
+#java{
+    background-color:#2c9dff;
+}
+#bds{
+    background-color: #1cf4e9;
+}
+#web{
+    background-color: #10871a;
+}
+#jindaishi{
+    background-color: #fffb00;
+}
+#lisan{
+    background-color: #f8009d;
+}

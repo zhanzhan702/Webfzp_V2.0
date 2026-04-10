@@ -3,146 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>web技术基础实验V1.0</title>
+    <title>web技术基础实验V2.0</title>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
 
-    <div id="top" style="text-align: center;">
-        <h1 >2025-2026学期课程情况</h1>
-        <a href="#course-introduction">课程简介</a>
-        <a href="#course-schedule">课表</a>
-        <a href="#textbooks">教材</a>
+    <div>
+        <h1>2025-2026学期课程情况</h1>
+        <p class="main">
+            <a id="hyperlink" href="introduce.html" target="mainFrame">课程简介</a>
+            <a id="hyperlink" href="schedule.html" target="mainFrame">课表</a>
+            <a id="hyperlink" href="book.html" target="mainFrame">教材</a>
+        </p>
     </div>
-    
-
-    <h2 id="course-introduction">课程简介</h2>
-    
-    <p>
-        <span>
-            <big>本</big>课程是软件工程专业的一门专业必修课。通过对Web前端三大主流开发技术学习、 探究和实践，让学生理解和掌握<em>HTML5、CSS3、JavaScript</em> 等脚本语言的相关知识， 通过项目实战和训练培养学生开发和设计Web网站或网页的基本操作技能和工作岗位适应能力。 
-        </span>
-    </p>
-    <p>
-        <span>
-            <big>通</big>过本课程的学习，使学生理解和掌握HTML（超文本标记语言） 中各种常用标记的使用；CSS（层叠样式表）常用属性的使用， 如何运用div+CSS对网页进行布局； <span class="code">JavaScript</span> 脚本语言的基础知识， 以及借助于<span class="code">JavaScript</span>语言的强大功能增强网页功能，实现用户交互事件等动态网页功能， 为后续课程奠定学习基础。
-        </span>
-    </p>
-    <hr>
-    <h2 id="course-schedule">课表</h2>
-    <table>
-        <tr>
-            <th>星期一</th>
-            <th>星期二</th>
-            <th>星期三</th>
-            <th>星期四</th>
-            <th>星期五</th>
-        </tr>
-        <tr>
-            <td>计算机组成原理<strong>3A512</strong></td>
-            <td>Java语言课程设计<strong>工A103</strong></td>
-            <td>Java语言<strong>工A103</strong></td>
-            <td>Web技术基础<strong>工A306</strong></td>
-            <td>离散数学<strong>3A216</strong></td>
-        </tr>
-        <tr>
-            <td>Java语言<strong>工A103</strong></td>
-            <td>Web技术基础<strong>工A306</strong></td>
-            <td>离散数学<strong>3A216</strong></td>
-            <td>Web技术基础<strong>工A306</strong></td>
-            <td>Java语言<strong>工A103</strong></td>
-        </tr>
-        <tr>
-            <td>数据库原理与应用<strong>3A216</strong></td>
-            <td>中国近现代史纲要<strong>1B107</strong></td>
-            <td></td>
-            <td></td>
-            <td>中国近现代史纲要<strong>1B107</strong></td>
-        </tr>
-        <tr>
-            <td>数据库原理与应用<strong>3A216</strong></td>
-            <td>中国近现代史纲要<strong>1B107</strong></td>
-            <td></td>
-            <td></td>
-            <td>中国近现代史纲要<strong>1B107</strong></td>
-        </tr>
-    </table>
-    <hr>
-    <h2 id="textbooks">教材</h2>
-    <dl>
-        <dt>计算机组成原理</dt>
-        <dd>
-            <figure>
-                <figcaption>教材</figcaption>
-                <img src="images/computer.jpg" alt="计算机组成原理" width="200" height="300">
-            </figure>
-        </dd>
-
-        <dd>
-            <figure>
-                <figcaption>参考书</figcaption>
-                <img src="images/computer2.jpg" alt="现代计算机组成原理" width="200" height="300">
-                <img src="images/computer3.jpg" alt="计算机组成原理教程" width="200" height="300">
-            </figure>
-        </dd>
-        <dt>数据库原理与应用</dt>
-        <dd>
-            <figure>
-                <figcaption>教材</figcaption>
-                <img src="images/database.jpg" alt="数据库原理与应用" width="200" height="300">
-            </figure>
-        </dd>
-        <dt>离散数学</dt>
-        <dd>
-            <figure>
-                <figcaption>教材</figcaption>
-                <img src="images/DiscreteMath.jpg" alt="离散数学" width="200" height="300">
-            </figure>
-        </dd>
-        <dt>Java</dt>
-        <dd>
-            <figure>
-                <figcaption>教材</figcaption>
-                <img src="images/Java.jpg" alt="Java" width="200" height="300">
-            </figure>
-        </dd>
-        <dt>web</dt>
-        <dd>
-            <figure>
-                <figcaption>教材</figcaption>
-                <img src="images/web.jpg" alt="web" width="200" height="300">
-            </figure>
-        </dd>
-        <dt>Web2</dt>
-        <dd>
-            <figure>
-                <figcaption>教材</figcaption>
-                <img src="images/Web2.jpg" alt="Web2" width="200" height="300">
-            </figure>
-        </dd>
-    </dl>
-    <p>
-        <a href="#top">返回顶部</a>
-        <div>©闽江学院 计算机与大数据学院<sup>™</sup>软件工程</div>
-        <div>联系人：傅展鹏 学号：3242508217</div>
-    </p>
+    <iframe name="mainFrame" src="introduce.html" height="320px" width="640px"></iframe>
+  
+    <footer class="main">
+        &copy;闽江大学&nbsp;&nbsp;计算机与大数据学院&trade;软件工程<br>
+        联系人：傅展鹏&nbsp;&nbsp;学号：3242508217
+    </footer>
 
 
 </body>
 
 <style>
-    .code {
-        font-family: 'Courier New', monospace;
-    }
-
-    .image-container {
+    h1{
+        color: blue;
         text-align: center;
-        margin: 20px 0;
+    }
+    .main{
+        color: blue;
+        background-image: url("images/top-bg.gif");
     }
 
-    table, th, td {
-        border: 1px solid black;
-        border-collapse: collapse;
+    #hyperlink:hover {
+        color: red;
     }
 
 </style>
