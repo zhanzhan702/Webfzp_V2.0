@@ -10,7 +10,6 @@
 
 table, th, td {
     border: 1px solid black;
-    border-collapse: collapse;
 }
 
 /* 教材页面图片过渡效果 */
