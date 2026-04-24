@@ -1,6 +1,46 @@
 /* 通用样式 */
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
 .code {
     font-family: 'Courier New', monospace;
+}
+
+#course-introduction,
+#course-schedule,
+#textbooks h2 {
+    font-size: 32px;
+    color: #1f618d;
+    font-weight: 700;
+    margin: 24px 0 16px;
+}
+
+#course-introduction {
+    text-align: center;
+}
+
+#course-introduction-text {
+    max-width: 900px;
+    margin: 0 auto 18px;
+    padding: 0 16px;
+    color: #333;
+    line-height: 1.8;
+}
+
+#course-schedule {
+    margin-bottom: 16px;
 }
 
 .image-container {
@@ -27,6 +67,48 @@ table, th, td {
     height: 480px;
 }
 
+#textbooks {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+#textbooks h2 {
+    text-align: center;
+    color: #c0392b;
+    font-size: 36px;
+    margin-bottom: 24px;
+}
+
+.course-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+.course-card {
+    width: 300px;
+    text-align: center;
+}
+
+.course-name {
+    font-size: 22px;
+    color: #1f618d;
+    font-weight: 700;
+    margin-bottom: 14px;
+}
+
+.course-type{
+    color: #3e7f69;
+}
+
+.course-images figcaption {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 8px;
+}
+
 /* 课表课程背景色 */
 #computer-architecture {
     background-color: red;
@@ -50,4 +132,38 @@ table, th, td {
 
 #discrete-mathematics {
     background-color: #f8009d;
+}
+
+@media screen and (min-height:540px) {
+    iframe{
+        height: 540px;
+        overflow-y: hidden;
+    }
+    
+}
+
+@media screen and (max-width: 640px) {
+    #course-introduction,
+    #course-schedule,
+    #textbooks h2 {
+        text-align: center;
+        position: static;
+        left: 0;
+    }
+
+    table th:first-child,
+    table td[rowspan],
+    .jc {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 640px) {
+    #course-introduction,
+    #course-schedule,
+    #textbooks h2 {
+        position: relative;
+        left: 400px;
+        text-align: left;
+    }
 }
