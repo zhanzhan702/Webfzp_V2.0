@@ -22,7 +22,7 @@ body::-webkit-scrollbar {
 #course-schedule,
 #textbooks h2 {
     font-size: 32px;
-    color: #1f618d;
+    color: red;
     font-weight: 700;
     margin: 24px 0 16px;
 }
@@ -32,8 +32,6 @@ body::-webkit-scrollbar {
 }
 
 #course-introduction-text {
-    max-width: 900px;
-    margin: 0 auto 18px;
     padding: 0 16px;
     color: #333;
     line-height: 1.8;
@@ -59,7 +57,6 @@ table, th, td {
     width: auto;
     height: 300px;
     display: block;
-    margin: 8px auto;
 }
 
 #textbooks img:hover {
@@ -68,8 +65,6 @@ table, th, td {
 }
 
 #textbooks {
-    max-width: 1200px;
-    margin: 0 auto;
     padding: 20px;
 }
 
@@ -149,6 +144,7 @@ table, th, td {
         text-align: center;
         position: static;
         left: 0;
+        color: red;
     }
 
     table th:first-child,
@@ -165,5 +161,6 @@ table, th, td {
         position: relative;
         left: 400px;
         text-align: left;
+        color: blue;
     }
 }
