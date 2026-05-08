@@ -26,47 +26,6 @@
         &copy;闽江大学&nbsp;&nbsp;计算机与大数据学院&trade;软件工程<br>
         联系人：傅展鹏&nbsp;&nbsp;学号：3242508217
     </footer>
-    <script>
-        function isMobileDevice() {
-            var device = navigator.userAgent ;          
-            return (device.indexOf("iPhone")>0||device.indexOf("Android")>0);
-        }
-
-        function updateTime() {
-            var now = new Date();
-            var text = isMobileDevice()
-                ? now.format("hh:mm:ss")
-                : now.format("yyyy-MM-dd hh:mm:ss");
-            document.getElementById("timeDisplay").textContent = text;
-        }
-
-        function adjustFrameHeight() {
-            var header = document.querySelector(".header-wrapper");
-            var footer = document.querySelector(".footer-section");
-            var mainFrame = document.querySelector(".mainFrame");
-            var height = document.documentElement.clientHeight
-                - (header ? header.clientHeight : 0)
-                - (footer ? footer.clientHeight : 0)
-                -24;
-                // 补足footer的padding部分
-            if (height < 0) height = 0;
-            mainFrame.style.height = height + "px";
-        }
-
-        window.addEventListener("load", function () {
-            updateTime();
-            adjustFrameHeight();
-            setInterval(function () {
-                updateTime();
-                adjustFrameHeight();
-            }, 1000);
-        });
-
-        window.addEventListener("resize", function () {
-            adjustFrameHeight();
-            updateTime();
-        });
-    </script>
 </body>
 
 <style>
