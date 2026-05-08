@@ -3,17 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>web技术基础实验V3.0</title>
+    <title>web技术基础实验V4.0</title>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <script src="js/utils.js"></script>
 </head>
 <body>
-    <div>
+    <div class="header-wrapper">
         <h1 class="hand">2025-2026学期课程情况</h1>
 
             <div class="nav-section">
                 <a class="nav-link" href="introduce.html" target="mainFrame">课程简介</a>
                 <a class="nav-link" href="schedule.html" target="mainFrame">课表</a>
                 <a class="nav-link" href="book.html" target="mainFrame">教材</a>
+                <span class="time-display" id="timeDisplay"></span>
             </div>
 
         
@@ -24,6 +26,47 @@
         &copy;闽江大学&nbsp;&nbsp;计算机与大数据学院&trade;软件工程<br>
         联系人：傅展鹏&nbsp;&nbsp;学号：3242508217
     </footer>
+    <script>
+        function isMobileDevice() {
+            var device = navigator.userAgent ;          
+            return (device.indexOf("iPhone")>0||device.indexOf("Android")>0);
+        }
+
+        function updateTime() {
+            var now = new Date();
+            var text = isMobileDevice()
+                ? now.format("hh:mm:ss")
+                : now.format("yyyy-MM-dd hh:mm:ss");
+            document.getElementById("timeDisplay").textContent = text;
+        }
+
+        function adjustFrameHeight() {
+            var header = document.querySelector(".header-wrapper");
+            var footer = document.querySelector(".footer-section");
+            var mainFrame = document.querySelector(".mainFrame");
+            var height = document.documentElement.clientHeight
+                - (header ? header.clientHeight : 0)
+                - (footer ? footer.clientHeight : 0)
+                -24;
+                // 补足footer的padding部分
+            if (height < 0) height = 0;
+            mainFrame.style.height = height + "px";
+        }
+
+        window.addEventListener("load", function () {
+            updateTime();
+            adjustFrameHeight();
+            setInterval(function () {
+                updateTime();
+                adjustFrameHeight();
+            }, 1000);
+        });
+
+        window.addEventListener("resize", function () {
+            adjustFrameHeight();
+            updateTime();
+        });
+    </script>
 </body>
 
 <style>
@@ -58,6 +101,14 @@
         padding: 12px 16px;
         color: blue;
         background-image: url("images/top-bg.gif");
+        flex-wrap: wrap;
+    }
+
+    .time-display {
+        margin-left: auto;
+        color: blue;
+        font-weight: bold;
+        white-space: nowrap;
     }
 
     .footer-section {
