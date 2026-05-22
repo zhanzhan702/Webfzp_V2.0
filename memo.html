@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>备忘录</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h2 id="memo-title">备忘录</h2>
+
+    <div id="memoToolbar">
+        <button id="addMemoBtn" class="memo-btn memo-btn-primary">添加备忘录</button>
+    </div>
+
+    <!-- 备忘录表单（默认隐藏） -->
+    <div id="memoForm" style="display: none;">
+        <h3>新建备忘录</h3>
+        <form id="memoFormInner" onsubmit="return false;">
+            <div class="form-group">
+                <label for="memoDate">日期：</label>
+                <input type="date" id="memoDate">
+            </div>
+            <div class="form-group">
+                <label for="memoContent">内容：</label>
+                <textarea id="memoContent" rows="4" placeholder="请输入备忘录内容..."></textarea>
+            </div>
+            <div class="form-actions">
+                <button type="button" id="confirmBtn" class="memo-btn memo-btn-success">确认</button>
+                <button type="reset" id="resetBtn" class="memo-btn memo-btn-secondary">重置</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- 备忘录列表 -->
+    <div id="memoList"></div>
+
+    <script>
+        // 获取中文周几名称
+        function getWeekDay(dateStr) {
+            var weekDays = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+            var d = new Date(dateStr);
+            return weekDays[d.getDay()];
+        }
+
+        window.addEventListener("load", function() {
+            // DOM 元素引用
+            var addMemoBtn = document.getElementById("addMemoBtn");
+            var memoForm = document.getElementById("memoForm");
+            var memoDate = document.getElementById("memoDate");
+            var memoContent = document.getElementById("memoContent");
+            var confirmBtn = document.getElementById("confirmBtn");
+            var resetBtn = document.getElementById("resetBtn");
+            var memoList = document.getElementById("memoList");
+            var memoTitle = document.getElementById("memo-title");
+
+            // 设置日期默认值为当日
+            var today = new Date();
+            var year = today.getFullYear();
+            var month = String(today.getMonth() + 1).padStart(2, "0");
+            var day = String(today.getDate()).padStart(2, "0");
+            var todayStr = year + "-" + month + "-" + day;
+            memoDate.value = todayStr;
+
+            // 在标题中显示今日周几
+            memoTitle.textContent = "备忘录 - " + getWeekDay(todayStr);
+
+            // 显示表单
+            addMemoBtn.addEventListener("click", function() {
+                memoForm.style.display = "block";
+                addMemoBtn.style.display = "none";
+                // 重置日期为当日
+                memoDate.value = year + "-" + month + "-" + day;
+                memoContent.value = "";
+            });
+
+            // 确认按钮（type="button"，不会提交表单）
+            confirmBtn.addEventListener("click", function() {
+                var date = memoDate.value;
+                var content = memoContent.value.trim();
+
+                if (!content) {
+                    alert("请输入备忘录内容！");
+                    return;
+                }
+
+                // 创建备忘录对象
+                var memo = {
+                    id: Date.now(),
+                    date: date,
+                    content: content,
+                    createTime: new Date().toLocaleString()
+                };
+
+                // 保存到 localStorage
+                saveMemo(memo);
+
+                // 重新渲染列表
+                renderMemos();
+
+                // 隐藏表单，显示按钮
+                memoForm.style.display = "none";
+                addMemoBtn.style.display = "inline-block";
+
+                // 清空表单
+                memoContent.value = "";
+                memoDate.value = year + "-" + month + "-" + day;
+            });
+
+            // 重置按钮
+            resetBtn.addEventListener("click", function() {
+                memoContent.value = "";
+                memoDate.value = year + "-" + month + "-" + day;
+            });
+
+            // 从 localStorage 读取备忘录
+            function getMemos() {
+                var memos = localStorage.getItem("memos");
+                return memos ? JSON.parse(memos) : [];
+            }
+
+            // 保存备忘录到 localStorage
+            function saveMemo(memo) {
+                var memos = getMemos();
+                memos.push(memo);
+                localStorage.setItem("memos", JSON.stringify(memos));
+            }
+
+            // 渲染备忘录列表
+            function renderMemos() {
+                var memos = getMemos();
+                if (memos.length === 0) {
+                    memoList.innerHTML = '<div class="memo-empty">暂无备忘录，点击上方按钮添加</div>';
+                    return;
+                }
+
+                var html = '<div class="memo-count">共 ' + memos.length + ' 条备忘录</div>';
+                for (var i = memos.length - 1; i >= 0; i--) {
+                    var m = memos[i];
+                    html +=
+                        '<div class="memo-item">' +
+                            '<div class="memo-item-header">' +
+                                '<span class="memo-item-date">' + m.date + '</span>' +
+                                '<button class="memo-delete-btn" data-id="' + m.id + '" title="删除">删除</button>' +
+                            '</div>' +
+                            '<div class="memo-item-content">' + escapeHtml(m.content) + '</div>' +
+                            '<div class="memo-item-time">创建于 ' + m.createTime + '</div>' +
+                        '</div>';
+                }
+                memoList.innerHTML = html;
+
+                // 为删除按钮绑定事件
+                var deleteBtns = memoList.querySelectorAll(".memo-delete-btn");
+                for (var j = 0; j < deleteBtns.length; j++) {
+                    (function(btn) {
+                        btn.addEventListener("click", function() {
+                            var id = parseInt(this.getAttribute("data-id"));
+                            deleteMemo(id);
+                        });
+                    })(deleteBtns[j]);
+                }
+            }
+
+            // 删除备忘录
+            function deleteMemo(id) {
+                if (!confirm("确定要删除此备忘录吗？")) return;
+                var memos = getMemos();
+                var newMemos = [];
+                for (var i = 0; i < memos.length; i++) {
+                    if (memos[i].id !== id) {
+                        newMemos.push(memos[i]);
+                    }
+                }
+                localStorage.setItem("memos", JSON.stringify(newMemos));
+                renderMemos();
+            }
+
+            // HTML 转义（防止 XSS）
+            function escapeHtml(text) {
+                var div = document.createElement("div");
+                div.appendChild(document.createTextNode(text));
+                return div.innerHTML;
+            }
+
+            // 页面加载时渲染已有备忘录
+            renderMemos();
+        });
+    </script>
+</body>
+</html>

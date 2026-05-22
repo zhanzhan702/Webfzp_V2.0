@@ -52,5 +52,76 @@
             <td id="modern-chinese-history">中国近现代史纲要<strong>1B107</strong></td>
         </tr>
     </table>
+
+    <div id="courseInfoDisplay">
+        <p style="color:#888;">点击表格中的课程查看详细信息</p>
+    </div>
+
+    <script>
+        window.addEventListener("load", function() {
+            var table = document.querySelector("table");
+            var headerRow = table.rows[0];
+            
+            // 时间对应信息
+            var timeSlotInfo = [
+                { period: "上午", slot: "第一二节" },
+                { period: "上午", slot: "第三四节" },
+                { period: "下午", slot: "第五六节" },
+                { period: "下午", slot: "第七八节" }
+            ];
+
+            // 遍历表格行（跳过表头行）
+            for (var r = 1; r < table.rows.length; r++) {
+                var row = table.rows[r];
+                // 判断该行第一个单元格是否有 rowspan（即上午/下午行）
+                var hasRowspan = row.cells[0] && row.cells[0].hasAttribute("rowspan");
+                
+                for (var c = 0; c < row.cells.length; c++) {
+                    var cell = row.cells[c];
+                    // 跳过节次/时段单元格（jc类）和空单元格
+                    if (cell.classList.contains("jc")) continue;
+                    if (!cell.textContent.trim()) continue;
+                    
+                    // 为课程单元格添加点击交互
+                    cell.style.cursor = "pointer";
+                    cell.title = "点击查看课程信息";
+                    
+                    (function(td, rowIdx, colIdx, hasRS) {
+                        td.addEventListener("click", function() {
+                            // 获取课程名称（<strong>之前的文本）
+                            var courseName = "";
+                            for (var k = 0; k < this.childNodes.length; k++) {
+                                if (this.childNodes[k].nodeType === 3) { // textNode
+                                    courseName += this.childNodes[k].nodeValue.trim();
+                                }
+                            }
+                            // 获取上课地点
+                            var locationEl = this.querySelector("strong");
+                            var location = locationEl ? locationEl.textContent : "无";
+                            
+                            // 计算星期几
+                            var dayColIdx = hasRS ? (colIdx - 1) : colIdx;
+                            var day = headerRow.cells[dayColIdx] ? headerRow.cells[dayColIdx].textContent : "未知";
+                            
+                            // 获取时段信息
+                            var info = timeSlotInfo[rowIdx - 1];
+                            
+                            // 显示课程信息
+                            document.getElementById("courseInfoDisplay").innerHTML =
+                                "<div class=\"course-info-card\">" +
+                                    "<h3>课程详情</h3>" +
+                                    "<table class=\"info-table\">" +
+                                        "<tr><td class=\"info-label\">课程名称</td><td>" + courseName + "</td></tr>" +
+                                        "<tr><td class=\"info-label\">上课地点</td><td>" + location + "</td></tr>" +
+                                        "<tr><td class=\"info-label\">星期</td><td>" + day + "</td></tr>" +
+                                        "<tr><td class=\"info-label\">节次</td><td>" + info.period + " " + info.slot + "</td></tr>" +
+                                    "</table>" +
+                                "</div>";
+                        });
+                    })(cell, r, c, hasRowspan);
+                }
+            }
+        });
+    </script>
 </body>
 </html>

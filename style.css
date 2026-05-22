@@ -129,6 +129,231 @@ table, th, td {
     background-color: #f8009d;
 }
 
+/* 课表页面课程信息卡片 */
+#courseInfoDisplay {
+    padding: 12px 16px;
+    margin: 12px auto;
+    max-width: 500px;
+}
+
+.course-info-card {
+    background-color: #fff;
+    color: #333;
+    border: 2px solid blue;
+    padding: 12px 16px;
+}
+
+.course-info-card h3 {
+    margin: 0 0 12px 0;
+    font-size: 20px;
+    text-align: center;
+    color: red;
+}
+
+.course-info-card .info-table {
+    width: 100%;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.course-info-card .info-table td {
+    border: 1px solid black;
+    padding: 6px 10px;
+    font-size: 14px;
+}
+
+.course-info-card .info-label {
+    font-weight: bold;
+    width: 80px;
+    color: blue;
+}
+
+/* ========== 备忘录页面样式 ========== */
+#memo-title {
+    text-align: center;
+    color: red;
+    font-size: 32px;
+    margin: 24px 0 16px;
+}
+
+#memoToolbar {
+    text-align: center;
+    margin: 16px 0;
+}
+
+.memo-btn {
+    padding: 6px 16px;
+    border: 1px solid black;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.memo-btn:hover {
+    background-color: #ddd;
+}
+
+.memo-btn-primary {
+    background-color: blue;
+    color: #fff;
+    border-color: blue;
+}
+
+.memo-btn-primary:hover {
+    background-color: darkblue;
+}
+
+.memo-btn-success {
+    background-color: green;
+    color: #fff;
+    border-color: green;
+}
+
+.memo-btn-success:hover {
+    background-color: darkgreen;
+}
+
+.memo-btn-secondary {
+    background-color: #888;
+    color: #fff;
+    border-color: #888;
+}
+
+.memo-btn-secondary:hover {
+    background-color: #666;
+}
+
+/* 备忘录表单 */
+#memoForm {
+    max-width: 500px;
+    margin: 16px auto;
+    padding: 16px;
+    border: 2px solid blue;
+    background-color: #e0f7fa;
+}
+
+#memoForm h3 {
+    margin: 0 0 16px 0;
+    color: red;
+    text-align: center;
+    font-size: 18px;
+}
+
+.form-group {
+    margin-bottom: 12px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 4px;
+    color: #333;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.form-group input[type="date"],
+.form-group textarea {
+    width: 100%;
+    padding: 6px 8px;
+    border: 1px solid #999;
+    font-size: 14px;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+.form-group input[type="date"]:focus,
+.form-group textarea:focus {
+    border-color: blue;
+    outline: none;
+}
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 16px;
+}
+
+/* 备忘录列表 */
+#memoList {
+    max-width: 600px;
+    margin: 16px auto;
+    padding: 0 16px;
+}
+
+.memo-count {
+    text-align: center;
+    color: #666;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+.memo-empty {
+    text-align: center;
+    color: #999;
+    font-size: 16px;
+    padding: 40px 0;
+}
+
+.memo-item {
+    border: 1px solid black;
+    padding: 10px 14px;
+    margin-bottom: 10px;
+    background-color: #fff;
+}
+
+.memo-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+    border-bottom: 1px dashed #ccc;
+    padding-bottom: 6px;
+}
+
+.memo-item-date {
+    font-weight: bold;
+    color: blue;
+    font-size: 13px;
+}
+
+.memo-item-weekday {
+    color: #e67e22;
+    font-weight: normal;
+    font-size: 12px;
+    margin-left: 6px;
+}
+
+.memo-delete-btn {
+    background: none;
+    border: 1px solid #ccc;
+    color: #999;
+    cursor: pointer;
+    font-size: 13px;
+    padding: 1px 6px;
+}
+
+.memo-delete-btn:hover {
+    color: red;
+    border-color: red;
+}
+
+.memo-item-content {
+    color: #333;
+    font-size: 14px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+.memo-item-time {
+    color: #999;
+    font-size: 12px;
+    margin-top: 6px;
+    text-align: right;
+}
+
 @media screen and (min-height:540px) {
     iframe{
         height: 540px;
