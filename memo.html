@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>备忘录</title>
+    <title>web技术基础实验V6.0</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -24,6 +24,16 @@
             <div class="form-group">
                 <label for="memoContent">内容：</label>
                 <textarea id="memoContent" rows="4" placeholder="请输入备忘录内容..."></textarea>
+            </div>
+            <div class="form-group">
+                <label>重要性：</label>
+                <label><input type="radio" name="important" value="重要" checked> 重要</label>
+                <label><input type="radio" name="important" value="普通"> 普通</label>
+            </div>
+            <div class="form-group">
+                <label>完成与否：</label>
+                <label><input type="radio" name="done" value="已完成"> 已完成</label>
+                <label><input type="radio" name="done" value="未完成" checked> 未完成</label>
             </div>
             <div class="form-actions">
                 <button type="reset" id="resetBtn" class="memo-btn memo-btn-secondary">重置</button>
@@ -85,10 +95,19 @@
                 }
 
                 // 创建备忘录对象
+                // 获取单选按钮值（重要性、完成状态）并在控制台验证
+                var importantEl = document.querySelector('input[name="important"]:checked');
+                var doneEl = document.querySelector('input[name="done"]:checked');
+                var important = importantEl ? importantEl.value : "普通";
+                var done = doneEl ? doneEl.value : "未完成";
+                console.log('important=', important, 'done=', done);
+
                 var memo = {
                     id: Date.now(),
                     date: date,
-                    content: content,
+                    desc: content,
+                    important: important,
+                    done: done,
                     createTime: new Date().toLocaleString()
                 };
 
@@ -137,13 +156,22 @@
                 var html = '<div class="memo-count">共 ' + memos.length + ' 条备忘录</div>';
                 for (var i = memos.length - 1; i >= 0; i--) {
                     var m = memos[i];
+                    var cls = '';
+                    if (m.done === '已完成') cls += ' memo-done';
+                    if (m.important === '重要') cls += ' memo-important';
                     html +=
-                        '<div class="memo-item">' +
+                        '<div class="memo-item' + cls + '">' +
                             '<div class="memo-item-header">' +
-                                '<span class="memo-item-date">' + m.date + '</span>' +
-                                '<button class="memo-delete-btn" data-id="' + m.id + '" title="删除">删除</button>' +
+                                '<div>' +
+                                    '<span class="memo-item-date">' + m.date + '</span>' +
+                                    '<span class="memo-item-weekday"> ' + getWeekDay(m.date) + '</span>' +
+                                '</div>' +
+                                '<div>' +
+                                    '<button class="memo-toggle-btn" data-id="' + m.id + '" title="切换完成">切换完成</button>' +
+                                    ' <button class="memo-delete-btn" data-id="' + m.id + '" title="删除">删除</button>' +
+                                '</div>' +
                             '</div>' +
-                            '<div class="memo-item-content">' + escapeHtml(m.content) + '</div>' +
+                            '<div class="memo-item-content">' + escapeHtml(m.desc) + ' <span class="meta">' + m.important + ' ' + m.done + '</span></div>' +
                             '<div class="memo-item-time">创建于 ' + m.createTime + '</div>' +
                         '</div>';
                 }
@@ -159,6 +187,16 @@
                         });
                     })(deleteBtns[j]);
                 }
+
+                var toggleBtns = memoList.querySelectorAll('.memo-toggle-btn');
+                for (var k = 0; k < toggleBtns.length; k++) {
+                    (function(btn) {
+                        btn.addEventListener('click', function() {
+                            var id = parseInt(this.getAttribute('data-id'));
+                            toggleDone(id);
+                        });
+                    })(toggleBtns[k]);
+                }
             }
 
             // 删除备忘录
@@ -172,6 +210,19 @@
                     }
                 }
                 localStorage.setItem("memos", JSON.stringify(newMemos));
+                renderMemos();
+            }
+
+            // 切换完成/未完成
+            function toggleDone(id) {
+                var memos = getMemos();
+                for (var i = 0; i < memos.length; i++) {
+                    if (memos[i].id === id) {
+                        memos[i].done = (memos[i].done === '已完成') ? '未完成' : '已完成';
+                        break;
+                    }
+                }
+                localStorage.setItem('memos', JSON.stringify(memos));
                 renderMemos();
             }
 

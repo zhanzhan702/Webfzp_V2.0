@@ -303,6 +303,43 @@ table, th, td {
     background-color: #fff;
 }
 
+/* 列表项 hover 背景 */
+.memo-item:hover {
+    background-color: #ffd1e0; /* 淡粉色 */
+}
+
+/* 已完成与未完成样式 */
+.memo-done .memo-item-content {
+    color: #7f8c8d; /* 灰色 */
+    text-decoration: line-through;
+}
+
+.memo-important {
+    border-color: #ff4d4d;
+}
+.memo-important .memo-item-content {
+    color: #c0392b; /* 重要项用红色 */
+}
+
+.memo-toggle-btn {
+    background: none;
+    border: 1px solid #888;
+    color: #333;
+    cursor: pointer;
+    padding: 1px 6px;
+    font-size: 13px;
+}
+.memo-toggle-btn:hover {
+    border-color: green;
+    color: green;
+}
+
+.meta {
+    font-size: 12px;
+    color: #666;
+    margin-left: 8px;
+}
+
 .memo-item-header {
     display: flex;
     justify-content: space-between;
