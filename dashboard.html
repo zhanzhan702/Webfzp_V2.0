@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>课程数据仪表盘 — 个人学习网站</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+    <header>
+        <h2 class="page-title">📊 课程数据仪表盘</h2>
+        <p class="page-subtitle">学期成绩概览与学习进度追踪（Mock数据演示）</p>
+    </header>
+
+    <main class="dashboard-section">
+        <!-- 顶部：GPA + 成绩表格 -->
+        <div class="dashboard-grid">
+            <!-- GPA 环形图 -->
+            <section class="card" aria-label="GPA概览">
+                <div class="card-title">📈 学期 GPA</div>
+                <div id="dashboardGPA"></div>
+            </section>
+
+            <!-- 成绩表格 -->
+            <section class="card" aria-label="成绩明细">
+                <div class="card-title">📋 成绩明细</div>
+                <div id="dashboardTable" style="overflow-x:auto;"></div>
+            </section>
+        </div>
+
+        <!-- 底部：柱状图 + 进度条 -->
+        <div class="dashboard-grid">
+            <!-- 柱状图 -->
+            <section class="card" aria-label="成绩柱状图">
+                <div class="card-title">📊 成绩分布</div>
+                <div class="chart-canvas-wrap">
+                    <canvas id="dashboardChart" aria-label="成绩柱状图"></canvas>
+                </div>
+            </section>
+
+            <!-- 课程进度 -->
+            <section class="card" aria-label="课程进度">
+                <div class="card-title">📖 课程学习进度</div>
+                <div class="course-progress-list" id="dashboardProgress"></div>
+            </section>
+        </div>
+    </main>
+
+    <script src="js/dashboard.js"></script>
+    <script>
+        window.addEventListener('load', function () {
+            DashboardApp.init({
+                tableSelector: '#dashboardTable',
+                gpaSelector: '#dashboardGPA',
+                progressSelector: '#dashboardProgress',
+                chartSelector: '#dashboardChart'
+            });
+        });
+    </script>
+</body>
+</html>

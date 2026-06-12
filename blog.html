@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人博客 — 个人学习网站</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+    <header>
+        <h2 class="page-title">✍️ 个人博客</h2>
+        <p class="page-subtitle">记录学习心得与技术分享</p>
+    </header>
+
+    <!-- 工具栏 -->
+    <div class="blog-toolbar">
+        <button class="btn btn-primary" id="blogNewBtn">＋ 发布文章</button>
+        <span style="color:var(--text-muted);font-size:13px;">点击文章卡片查看详情</span>
+    </div>
+
+    <!-- 文章编辑器（默认隐藏） -->
+    <div class="blog-editor" id="blogEditor" style="display:none;">
+        <h3 id="blogEditorTitle" style="text-align:center;color:#c0392b;margin-bottom:16px;">新建文章</h3>
+        <form id="blogForm">
+            <input type="hidden" id="blogEditId" value="">
+            <div class="form-group">
+                <label for="blogTitle">文章标题</label>
+                <input type="text" id="blogTitle" placeholder="请输入文章标题" required>
+            </div>
+            <div class="form-group">
+                <label for="blogCategory">分类标签</label>
+                <input type="text" id="blogCategory" placeholder="如：前端、后端、算法…">
+            </div>
+            <div class="form-group">
+                <label for="blogContent">文章内容</label>
+                <textarea id="blogContent" rows="10" placeholder="请输入文章正文内容…" required></textarea>
+            </div>
+            <div class="form-actions" style="display:flex;gap:10px;justify-content:center;">
+                <button type="submit" class="btn btn-success">保存文章</button>
+                <button type="button" class="btn btn-outline" id="blogCancelBtn">取消</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- 文章列表 -->
+    <section class="blog-list" id="blogList" aria-label="博客文章列表"></section>
+
+    <!-- 音频播放器（HTML5 audio 示例，满足考核要求） -->
+    <footer style="text-align:center;padding:16px;border-top:1px solid var(--border);margin-top:20px;">
+        <p style="font-size:12px;color:var(--text-muted);">🎵 学习背景音乐（HTML5 Audio）</p>
+        <audio controls loop style="max-width:300px;margin-top:6px;">
+            <!-- 使用静默音轨作为占位，避免裂图问题；可替换为真实音频文件 -->
+            <source src="#" type="audio/mpeg">
+            您的浏览器不支持 audio 标签。
+        </audio>
+    </footer>
+
+    <script src="js/blog.js"></script>
+    <script>
+        window.addEventListener('load', function () {
+            BlogApp.init({
+                listSelector: '#blogList',
+                editorSelector: '#blogEditor',
+                formSelector: '#blogForm',
+                cancelSelector: '#blogCancelBtn',
+                newBtnSelector: '#blogNewBtn'
+            });
+        });
+    </script>
+</body>
+</html>

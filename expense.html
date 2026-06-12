@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>记账本 — 个人学习网站</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+    <header>
+        <h2 class="page-title">💰 记账本</h2>
+        <p class="page-subtitle">记录日常收支，管理个人财务</p>
+    </header>
+
+    <!-- 添加按钮 -->
+    <div class="memo-toolbar">
+        <button class="btn btn-primary" id="expenseAddBtn">＋ 添加记录</button>
+    </div>
+
+    <!-- 统计面板 -->
+    <section class="expense-stats" id="expenseStats" aria-label="收支统计"></section>
+
+    <!-- 记账表单（默认隐藏） -->
+    <div id="expenseFormWrap" style="display:none;">
+        <article class="expense-form-area">
+            <h3 style="text-align:center;color:#c0392b;margin-bottom:16px;">新建记录</h3>
+            <form id="expenseFormInner">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="expenseType">类型</label>
+                        <select id="expenseType">
+                            <option value="expense">支出</option>
+                            <option value="income">收入</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="expenseAmount">金额（元）</label>
+                        <input type="number" id="expenseAmount" placeholder="请输入金额" min="0.01" step="0.01" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="expenseCategory">类别</label>
+                        <input type="text" id="expenseCategory" placeholder="如：餐饮、工资、交通…" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="expenseDate">日期</label>
+                        <input type="date" id="expenseDate" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="expenseNote">备注</label>
+                    <input type="text" id="expenseNote" placeholder="可选备注">
+                </div>
+                <div class="form-actions" style="display:flex;gap:10px;justify-content:center;">
+                    <button type="submit" class="btn btn-success">确认添加</button>
+                    <button type="button" class="btn btn-outline" id="expenseCancelBtn">取消</button>
+                </div>
+            </form>
+        </article>
+    </div>
+
+    <!-- 记录列表 -->
+    <section class="expense-list" id="expenseList" aria-label="记账记录列表"></section>
+
+    <script src="js/expense.js"></script>
+    <script>
+        window.addEventListener('load', function () {
+            ExpenseApp.init({
+                statsSelector: '#expenseStats',
+                listSelector: '#expenseList',
+                formSelector: '#expenseFormInner',
+                addBtnSelector: '#expenseAddBtn',
+                formWrapSelector: '#expenseFormWrap'
+            });
+
+            // 取消按钮
+            document.getElementById('expenseCancelBtn').addEventListener('click', function () {
+                document.getElementById('expenseFormWrap').style.display = 'none';
+                document.getElementById('expenseAddBtn').style.display = 'inline-block';
+            });
+        });
+    </script>
+</body>
+</html>

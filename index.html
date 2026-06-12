@@ -3,87 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>web技术基础实验V6.0</title>
+    <title>Web技术基础实验 — 个人学习网站</title>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/common.css">
     <script src="js/utils.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/carousel.js"></script>
 </head>
 <body>
-    <div class="header-wrapper">
-        <h1 class="hand">2025-2026学期课程情况</h1>
+    <!-- ====== 导航栏 ====== -->
+    <header class="navbar" id="navbar">
+        <span class="navbar-brand">📘 个人学习网站</span>
+        <button class="hamburger" id="hamburgerBtn" aria-label="菜单">☰</button>
+        <nav class="navbar-links" id="navbarLinks">
+            <a href="introduce.html" target="mainFrame" class="active" data-page="introduce">课程简介</a>
+            <a href="schedule.html" target="mainFrame" data-page="schedule">课表</a>
+            <a href="book.html" target="mainFrame" data-page="book">教材</a>
+            <a href="memo.html" target="mainFrame" data-page="memo">备忘录</a>
+            <a href="expense.html" target="mainFrame" data-page="expense">记账本</a>
+            <a href="dashboard.html" target="mainFrame" data-page="dashboard">数据仪表盘</a>
+            <a href="blog.html" target="mainFrame" data-page="blog">个人博客</a>
+        </nav>
+        <div class="navbar-user">
+            <span id="timeDisplay" style="font-size:13px;"></span>
+            <span id="userDisplay" style="margin-left:8px;"></span>
+            <button class="logout-btn" id="logoutBtn" style="display:none;">退出</button>
+        </div>
+    </header>
 
-            <div class="nav-section">
-                <a class="nav-link" href="introduce.html" target="mainFrame">课程简介</a>
-                <a class="nav-link" href="schedule.html" target="mainFrame">课表</a>
-                <a class="nav-link" href="book.html" target="mainFrame">教材</a>
-                <a class="nav-link" href="memo.html" target="mainFrame">备忘录</a>
-                <span class="time-display" id="timeDisplay"></span>
+    <!-- ====== 轮播图 ====== -->
+    <section class="carousel" id="mainCarousel" aria-label="广告轮播">
+        <div class="carousel-track">
+            <div class="carousel-slide">
+                <h3>🎓 欢迎来到个人学习网站</h3>
+                <p>Web技术基础课程项目 · 记录学习与成长</p>
             </div>
+            <div class="carousel-slide">
+                <h3>📚 课程学习与知识管理</h3>
+                <p>课表、教材、备忘录 — 一站式学习平台</p>
+            </div>
+            <div class="carousel-slide">
+                <h3>🚀 探索前端开发的无限可能</h3>
+                <p>HTML5 · CSS3 · JavaScript — 构建精彩Web体验</p>
+            </div>
+        </div>
+        <button class="carousel-btn prev" aria-label="上一张">‹</button>
+        <button class="carousel-btn next" aria-label="下一张">›</button>
+        <div class="carousel-dots"></div>
+    </section>
 
-        
-    </div>
-    <iframe name="mainFrame" src="introduce.html" class="mainFrame" scrolling="auto"></iframe>
+    <!-- ====== 主内容区（iframe） ====== -->
+    <main class="main-content-area">
+        <iframe name="mainFrame" src="introduce.html" class="mainFrame" scrolling="auto"
+                title="主内容区"></iframe>
+    </main>
 
-    <footer class="footer-section">
-        &copy;闽江大学&nbsp;&nbsp;计算机与大数据学院&trade;软件工程<br>
-        联系人：傅展鹏&nbsp;&nbsp;学号：3242508217
+    <!-- ====== 页脚 ====== -->
+    <footer class="footer">
+        &copy; 闽江大学 &nbsp; 计算机与大数据学院&trade; 软件工程<br>
+        联系人：傅展鹏 &nbsp; 学号：3242508217
     </footer>
+
+    <script>
+        /* ====== 响应式汉堡菜单 ====== */
+        (function () {
+            var hamburger = document.getElementById('hamburgerBtn');
+            var navLinks = document.getElementById('navbarLinks');
+            if (hamburger && navLinks) {
+                hamburger.addEventListener('click', function () {
+                    navLinks.classList.toggle('open');
+                });
+                navLinks.querySelectorAll('a').forEach(function (link) {
+                    link.addEventListener('click', function () {
+                        navLinks.classList.remove('open');
+                        navLinks.querySelectorAll('a').forEach(function (a) { a.classList.remove('active'); });
+                        this.classList.add('active');
+                    });
+                });
+            }
+        })();
+
+        /* ====== 时间更新 ====== */
+        (function () {
+            function updateTime() {
+                var el = document.getElementById('timeDisplay');
+                if (!el) return;
+                var now = new Date();
+                el.textContent = now.getFullYear() + '-' +
+                    String(now.getMonth() + 1).padStart(2, '0') + '-' +
+                    String(now.getDate()).padStart(2, '0') + ' ' +
+                    String(now.getHours()).padStart(2, '0') + ':' +
+                    String(now.getMinutes()).padStart(2, '0') + ':' +
+                    String(now.getSeconds()).padStart(2, '0');
+            }
+            updateTime();
+            setInterval(updateTime, 1000);
+        })();
+
+        /* ====== iframe 自适应高度 ====== */
+        (function () {
+            function adjustFrame() {
+                var frame = document.querySelector('.mainFrame');
+                if (!frame) return;
+                var navbar = document.getElementById('navbar');
+                var carousel = document.getElementById('mainCarousel');
+                var footer = document.querySelector('.footer');
+                var height = window.innerHeight
+                    - (navbar ? navbar.offsetHeight : 0)
+                    - (carousel ? carousel.offsetHeight : 0)
+                    - (footer ? footer.offsetHeight : 0)
+                    - 32;
+                if (height < 400) height = 400;
+                frame.style.height = height + 'px';
+            }
+            adjustFrame();
+            window.addEventListener('resize', adjustFrame);
+            setInterval(adjustFrame, 2000);
+        })();
+
+        /* ====== 登录/注册 + 轮播图初始化 ====== */
+        window.addEventListener('load', function () {
+            Auth.init(function (user) {
+                var userDisplay = document.getElementById('userDisplay');
+                var logoutBtn = document.getElementById('logoutBtn');
+                if (userDisplay) userDisplay.textContent = '👤 ' + user.username;
+                if (logoutBtn) logoutBtn.style.display = 'inline-block';
+            });
+
+            if (Auth.isLoggedIn()) {
+                var userDisplay = document.getElementById('userDisplay');
+                var logoutBtn = document.getElementById('logoutBtn');
+                if (userDisplay) userDisplay.textContent = '👤 ' + Auth.getUsername();
+                if (logoutBtn) {
+                    logoutBtn.style.display = 'inline-block';
+                    logoutBtn.addEventListener('click', function () {
+                        Auth.logout();
+                    });
+                }
+            }
+
+            Carousel.init('#mainCarousel');
+        });
+    </script>
 </body>
-
-<style>
-    h1 {
-        color: blue;
-        text-align: center;
-    }
-
-    .hand{
-        display: flex;
-        justify-content: center;
-    }
-
-    .mainFrame{
-        display: block;
-        height: 540px;
-        width: 100%;
-        background-color: #7fffd4;
-        border: none;
-    }
-
-    body {
-        margin: 0;
-        overflow-x: hidden;
-    }
-
-    .nav-section {
-        display: flex;
-        flex-direction: row;
-        gap: 24px;
-        align-items: center;
-        padding: 12px 16px;
-        color: blue;
-        background-image: url("images/top-bg.gif");
-        flex-wrap: wrap;
-    }
-
-    .time-display {
-        margin-left: auto;
-        color: blue;
-        font-weight: bold;
-        white-space: nowrap;
-    }
-
-    .footer-section {
-        position: fixed;
-        width: 100%;
-        text-align: center;
-        padding: 12px 0;
-        color: red;
-        background-image: url("images/top-bg.gif");
-    }
-
-    .nav-link:hover {
-        color: red;
-        font-size: 20px;
-    }
-</style>
-
 </html>

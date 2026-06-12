@@ -3,18 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>web技术基础实验V6.0</title>
-    <link rel="stylesheet" href="style.css">
+    <title>备忘录 — 个人学习网站</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/pages.css">
 </head>
 <body>
-    <h2 id="memo-title">备忘录</h2>
+    <header>
+        <h2 class="page-title" id="memo-title">备忘录</h2>
+    </header>
 
-    <div id="memoToolbar">
+    <div class="memo-toolbar">
         <button id="addMemoBtn" class="memo-btn memo-btn-primary">添加备忘录</button>
     </div>
 
     <!-- 备忘录表单（默认隐藏） -->
-    <div id="memoForm" style="display: none;">
+    <section class="memo-form-wrap" id="memoForm" style="display: none;">
         <h3>新建备忘录</h3>
         <form id="memoFormInner" onsubmit="return false;">
             <div class="form-group">
@@ -40,10 +43,10 @@
                 <button type="button" id="confirmBtn" class="memo-btn memo-btn-success">确认</button>
             </div>
         </form>
-    </div>
+    </section>
 
     <!-- 备忘录列表 -->
-    <div id="memoList"></div>
+    <section class="memo-list" id="memoList"></section>
 
     <script>
         // 获取中文周几名称
@@ -160,7 +163,7 @@
                     if (m.done === '已完成') cls += ' memo-done';
                     if (m.important === '重要') cls += ' memo-important';
                     html +=
-                        '<div class="memo-item' + cls + '">' +
+                        '<article class="memo-item' + cls + '">' +
                             '<div class="memo-item-header">' +
                                 '<div>' +
                                     '<span class="memo-item-date">' + m.date + '</span>' +
@@ -171,9 +174,9 @@
                                     ' <button class="memo-delete-btn" data-id="' + m.id + '" title="删除">删除</button>' +
                                 '</div>' +
                             '</div>' +
-                            '<div class="memo-item-content">' + escapeHtml(m.desc) + ' <span class="meta">' + m.important + ' ' + m.done + '</span></div>' +
-                            '<div class="memo-item-time">创建于 ' + m.createTime + '</div>' +
-                        '</div>';
+                            '<div class="memo-item-content">' + escapeHtml(m.desc) + ' <span class="memo-meta">' + m.important + ' ' + m.done + '</span></div>' +
+                            '<div class="memo-item-time"><time>创建于 ' + m.createTime + '</time></div>' +
+                        '</article>';
                 }
                 memoList.innerHTML = html;
 
