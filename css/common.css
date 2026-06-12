@@ -361,6 +361,21 @@ tr:hover {
     align-items: center;
     gap: 10px;
     font-size: 14px;
+    flex-shrink: 0;
+}
+
+#timeDisplay {
+    display: inline-block;
+    min-width: 72px;
+    text-align: right;
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+#userDisplay {
+    white-space: nowrap;
+    margin-left: 4px;
 }
 
 .navbar-user .logout-btn {
@@ -721,6 +736,12 @@ tr:hover {
         border-bottom: 1px solid rgba(255,255,255,0.1);
     }
     .hamburger { display: block; }
+    .navbar-brand { font-size: 15px; max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    /* 移动端 navbar-user 精简 */
+    .navbar-user { gap: 6px; font-size: 12px; }
+    #timeDisplay { min-width: 56px; font-size: 11px; }
+    #userDisplay { max-width: 60px; overflow: hidden; text-overflow: ellipsis; font-size: 11px; }
+    .logout-btn { padding: 2px 8px !important; font-size: 11px !important; }
     .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
     .form-row { flex-direction: column; }
     .carousel { height: 180px; }

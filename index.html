@@ -25,8 +25,8 @@
             <a href="blog.html" target="mainFrame" data-page="blog">个人博客</a>
         </nav>
         <div class="navbar-user">
-            <span id="timeDisplay" style="font-size:13px;"></span>
-            <span id="userDisplay" style="margin-left:8px;"></span>
+            <span id="timeDisplay">--:--:--</span>
+            <span id="userDisplay"></span>
             <button class="logout-btn" id="logoutBtn" style="display:none;">退出</button>
         </div>
     </header>
@@ -83,18 +83,27 @@
             }
         })();
 
-        /* ====== 时间更新 ====== */
+        /* ====== 时间更新（移动端精简格式，避免布局抖动） ====== */
         (function () {
+            var timeEl = document.getElementById('timeDisplay');
+            if (!timeEl) return;
+            timeEl.textContent = '--:--:--';
             function updateTime() {
-                var el = document.getElementById('timeDisplay');
-                if (!el) return;
                 var now = new Date();
-                el.textContent = now.getFullYear() + '-' +
-                    String(now.getMonth() + 1).padStart(2, '0') + '-' +
-                    String(now.getDate()).padStart(2, '0') + ' ' +
-                    String(now.getHours()).padStart(2, '0') + ':' +
-                    String(now.getMinutes()).padStart(2, '0') + ':' +
-                    String(now.getSeconds()).padStart(2, '0');
+                var isMobile = window.innerWidth < 768;
+                if (isMobile) {
+                    timeEl.textContent =
+                        String(now.getHours()).padStart(2, '0') + ':' +
+                        String(now.getMinutes()).padStart(2, '0') + ':' +
+                        String(now.getSeconds()).padStart(2, '0');
+                } else {
+                    timeEl.textContent = now.getFullYear() + '-' +
+                        String(now.getMonth() + 1).padStart(2, '0') + '-' +
+                        String(now.getDate()).padStart(2, '0') + ' ' +
+                        String(now.getHours()).padStart(2, '0') + ':' +
+                        String(now.getMinutes()).padStart(2, '0') + ':' +
+                        String(now.getSeconds()).padStart(2, '0');
+                }
             }
             updateTime();
             setInterval(updateTime, 1000);
