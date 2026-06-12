@@ -54,7 +54,7 @@
 
     <!-- ====== 主内容区（iframe） ====== -->
     <main class="main-content-area">
-        <iframe name="mainFrame" src="introduce.html" class="mainFrame" scrolling="auto"
+        <iframe name="mainFrame" src="introduce.html" class="mainFrame"
                 title="主内容区"></iframe>
     </main>
 
@@ -100,8 +100,9 @@
             setInterval(updateTime, 1000);
         })();
 
-        /* ====== iframe 自适应高度 ====== */
+        /* ====== iframe 自适应高度（性能优化：用 resize 事件 + 防抖） ====== */
         (function () {
+            var resizeTimer = null;
             function adjustFrame() {
                 var frame = document.querySelector('.mainFrame');
                 if (!frame) return;
@@ -117,8 +118,10 @@
                 frame.style.height = height + 'px';
             }
             adjustFrame();
-            window.addEventListener('resize', adjustFrame);
-            setInterval(adjustFrame, 2000);
+            window.addEventListener('resize', function () {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(adjustFrame, 150);
+            });
         })();
 
         /* ====== 登录/注册 + 轮播图初始化 ====== */

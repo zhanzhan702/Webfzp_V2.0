@@ -33,6 +33,13 @@
 
 html {
     scroll-behavior: smooth;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+    width: 0;
+    height: 0;
 }
 
 body {
@@ -42,7 +49,15 @@ body {
     color: var(--text);
     background: var(--bg);
     overflow-x: hidden;
+    overflow-y: auto;
     min-height: 100vh;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+body::-webkit-scrollbar {
+    width: 0;
+    height: 0;
 }
 
 a {
@@ -586,6 +601,7 @@ tr:hover {
     min-height: calc(100vh - var(--header-height) - 280px - var(--footer-height) - 20px);
     padding: 16px;
     background: var(--bg);
+    overflow: hidden;
 }
 
 .mainFrame {
@@ -596,6 +612,7 @@ tr:hover {
     border: none;
     border-radius: var(--radius);
     box-shadow: var(--shadow);
+    overflow: hidden;
 }
 
 /* ---------- 进度条 ---------- */
