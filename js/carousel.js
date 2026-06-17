@@ -38,9 +38,7 @@ var Carousel = (function () {
 
         /** 跳转到指定索引 */
         function goTo(index) {
-            if (index < 0) index = total - 1;
-            if (index >= total) index = 0;
-            current = index;
+            current = (index+total)%total;
             track.style.transform = 'translateX(-' + (current * 100) + '%)';
 
             // 更新圆点
