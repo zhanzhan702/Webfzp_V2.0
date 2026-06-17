@@ -79,7 +79,7 @@ var Auth = (function () {
         '<div class="modal-overlay" id="authOverlay">' +
         '  <div class="modal">' +
         '    <div class="modal-header">' +
-        '      <h2 id="authTitle">🔐 个人学习网站</h2>' +
+        '      <h2 id="authTitle">个人学习网站</h2>' +
         '      <p>登录以访问全部功能</p>' +
         '    </div>' +
         '    <div class="modal-tabs">' +
@@ -170,10 +170,10 @@ var Auth = (function () {
                 registerPanel.classList.remove('active');
                 if (tab === 'login') {
                     loginPanel.classList.add('active');
-                    authTitle.textContent = '🔐 个人学习网站';
+                    authTitle.textContent = '个人学习网站';
                 } else {
                     registerPanel.classList.add('active');
-                    authTitle.textContent = '📝 注册新账号';
+                    authTitle.textContent = '注册新账号';
                 }
             });
         });
